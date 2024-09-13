@@ -19,52 +19,52 @@ class _NavState extends State<Nav> {
     const BottomNavigationBarItem(
       activeIcon: Image(
         image: AssetImage('assets/icons/home_selected.png'),
-        width: 35,
-        height: 35,
+        width: 45,
+        height: 45,
       ),
       icon: Image(
         image: AssetImage('assets/icons/home_unselected.png'),
-        width: 35,
-        height: 35,
+        width: 45,
+        height: 45,
       ),
       label: 'Home'
     ),
     const BottomNavigationBarItem(
       activeIcon: Image(
         image: AssetImage('assets/icons/geocommunity_selected.png'),
-        width: 35,
-        height: 35,
+        width: 45,
+        height: 45,
       ),
       icon: Image(
         image: AssetImage('assets/icons/geocommunity_unselected.png'),
-        width: 35,
-        height: 35,
+        width: 45,
+        height: 45,
       ),
       label: 'Geocommunity'
     ),
     const BottomNavigationBarItem(
       activeIcon: Image(
         image: AssetImage('assets/icons/stats_selected.png'),
-        width: 35,
-        height: 35,
+        width: 45,
+        height: 45,
       ),
       icon: Image(
         image: AssetImage('assets/icons/stats_unselected.png'),
-        width: 35,
-        height: 35,
+        width: 45,
+        height: 45,
       ),
       label: 'Stats'
     ),
     const BottomNavigationBarItem(
       activeIcon: Image(
         image: AssetImage('assets/icons/profile_selected.png'),
-        width: 35,
-        height: 35,
+        width: 45,
+        height: 45,
       ),
       icon: Image(
         image: AssetImage('assets/icons/profile_unselected.png'),
-        width: 35,
-        height: 35,
+        width: 45,
+        height: 45,
       ),
       label: 'Profile'
     ),
@@ -93,6 +93,20 @@ class _NavState extends State<Nav> {
         // for the below line: https://stackoverflow.com/questions/44978216/flutter-remove-back-button-on-appbar
         automaticallyImplyLeading: true,
       ),
+      floatingActionButton: _selectedIndex == 0 ? 
+        FloatingActionButton(
+          onPressed: () async {
+            // Navigator.push(
+            //   context,
+            //   MaterialPageRoute(builder: (context) {
+            //     // return const QrCodeScanPage();
+            //   }),
+            // );
+          },
+          backgroundColor: const Color(0xFFC50102),
+          child: const Icon(Icons.qr_code, color: Colors.white, size: 36)
+        )
+        : null,
       body: widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(                                                
         currentIndex: _selectedIndex,
