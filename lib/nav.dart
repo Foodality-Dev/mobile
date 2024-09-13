@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:mobile/screens/home.dart';
 
 
 class Nav extends StatefulWidget {
@@ -11,6 +12,7 @@ class Nav extends StatefulWidget {
 }
 
 class _NavState extends State<Nav> {
+  late List<Widget> widgetOptions;
   int _selectedIndex = 0;
 
   final List<BottomNavigationBarItem> items = [
@@ -75,7 +77,14 @@ class _NavState extends State<Nav> {
   }
 
   @override
-  Widget build(BuildContext context) {         
+  Widget build(BuildContext context) { 
+    widgetOptions = const <Widget>[
+        Home(),
+        Center(child: Text("Hello world!")),
+        Center(child: Text("Hello world!")),
+        Center(child: Text("Hello world!")),
+      ];
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -84,11 +93,7 @@ class _NavState extends State<Nav> {
         // for the below line: https://stackoverflow.com/questions/44978216/flutter-remove-back-button-on-appbar
         automaticallyImplyLeading: true,
       ),
-      body: const Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
+      body: widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(                                                
         currentIndex: _selectedIndex,
         type: BottomNavigationBarType.fixed,
