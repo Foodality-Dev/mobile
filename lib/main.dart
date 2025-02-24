@@ -1,9 +1,15 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:mobile/intro/login.dart';
 import 'package:mobile/nav.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MainApp());
 }
 
@@ -12,6 +18,8 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final User? user = FirebaseAuth.instance.currentUser;
+
     return MaterialApp(
       theme: ThemeData(
         primaryTextTheme: TextTheme(  // as shown on #catalog
@@ -67,9 +75,7 @@ class MainApp extends StatelessWidget {
         hoverColor: Colors.transparent,
       ),
       title: 'Foodality',
-      home: const Nav(),
+      home: user != null ? const Nav() : Login(),
     );
   }
 }
-
-

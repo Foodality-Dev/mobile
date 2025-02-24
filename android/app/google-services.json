@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "468832515281",
+    "project_id": "foodality-79ee1",
+    "storage_bucket": "foodality-79ee1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:468832515281:android:00d2ead8293a220a8801f0",
+        "android_client_info": {
+          "package_name": "com.example.mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "468832515281-eagtkq0aivukh59j7b15bfeeoddcu4eu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPQTA9bGUmPoMn4mbzwW1OeaTPsUb6_fY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "468832515281-eagtkq0aivukh59j7b15bfeeoddcu4eu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
