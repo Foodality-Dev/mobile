@@ -21,7 +21,7 @@ class Authentication {
     User? user;
     ApiService api = ApiService();
 
-    final GoogleSignIn googleSignIn = GoogleSignIn(hostedDomain: "uci.edu");
+    final GoogleSignIn googleSignIn = GoogleSignIn();
 
     final GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
 
@@ -34,8 +34,7 @@ class Authentication {
       );
 
       try {
-        final UserCredential userCredential =
-            await auth.signInWithCredential(credential);
+        final UserCredential userCredential = await auth.signInWithCredential(credential);
 
         user = userCredential.user;
         String? userEmail = user?.email;
@@ -54,15 +53,13 @@ class Authentication {
 
         
       } on FirebaseAuthException catch (e) {
-        // Removing this first if-statement for security reasons, we do not want
-        // people to know the account exists w/ diff credenials
-        // if (e.code == 'Account already exists') {
-        //   ScaffoldMessenger.of(context).showSnackBar(
-        //     Authentication.customSnackBar(
-        //       content:
-        //           'The account already exists.',
-        //     ),
-        //   );
+        if (e.code == 'Account already exists') {
+          ScaffoldMessenger.of(context).showSnackBar(
+            Authentication.customSnackBar(
+              content:
+                  'The account already exists.',
+            ),
+          );
         if (e.code == 'invalid-credential') {
           ScaffoldMessenger.of(context).showSnackBar(
             Authentication.customSnackBar(
