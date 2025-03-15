@@ -80,16 +80,8 @@ class _ResetPasswordState extends State<ResetPassword> {
         stream: FirebaseAuth.instance.userChanges(),
         initialData: FirebaseAuth.instance.currentUser,
         builder: (context, snapshot) {
-          // EYE ICON CLICK CAUSES THIS TO APPEAR AND IT'S WEIRD.
-          // if (snapshot.connectionState != ConnectionState.active) {
-          //   return Center(child: CircularProgressIndicator());
-          // }
           final user = snapshot.data;
-          if (user != null) {
-            log("user is logged in! this is from login.dart");
-            // api.addUsernameCollection();
-            return const Nav();
-          }
+          if (user != null) return const Nav();
 
           return Scaffold(
               appBar: AppBar(

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:mobile/screens/home.dart';
+import 'package:mobile/screens/profile.dart';
 
 
 class Nav extends StatefulWidget {
@@ -16,55 +17,55 @@ class _NavState extends State<Nav> {
   int _selectedIndex = 0;
 
   final List<BottomNavigationBarItem> items = [
-    const BottomNavigationBarItem(
-      activeIcon: Image(
-        image: AssetImage('assets/icons/home_selected.png'),
-        width: 45,
-        height: 45,
+    BottomNavigationBarItem(
+      activeIcon: Image.asset(
+        'assets/icons/home.png',
+        width: 32.5,
+        height: 32.5,
       ),
-      icon: Image(
-        image: AssetImage('assets/icons/home_unselected.png'),
-        width: 45,
-        height: 45,
+      icon: Image.asset(
+        'assets/icons/home.png',
+        width: 32.5,
+        height: 32.5,
       ),
       label: 'Home'
     ),
-    const BottomNavigationBarItem(
-      activeIcon: Image(
-        image: AssetImage('assets/icons/geocommunity_selected.png'),
-        width: 45,
-        height: 45,
+    BottomNavigationBarItem(
+      activeIcon: Image.asset(
+        'assets/icons/discover.png',
+        width: 32.5,
+        height: 32.5,
       ),
-      icon: Image(
-        image: AssetImage('assets/icons/geocommunity_unselected.png'),
-        width: 45,
-        height: 45,
+      icon: Image.asset(
+        'assets/icons/discover.png',
+        width: 32.5,
+        height: 32.5,
       ),
-      label: 'Geocommunity'
+      label: 'Discover'
     ),
-    const BottomNavigationBarItem(
-      activeIcon: Image(
-        image: AssetImage('assets/icons/stats_selected.png'),
-        width: 45,
-        height: 45,
+    BottomNavigationBarItem(
+      activeIcon: Image.asset(
+        'assets/icons/notification_bell.png',
+        width: 32.5,
+        height: 32.5,
       ),
-      icon: Image(
-        image: AssetImage('assets/icons/stats_unselected.png'),
-        width: 45,
-        height: 45,
+      icon: Image.asset(
+        'assets/icons/notification_bell.png',
+        width: 32.5,
+        height: 32.5,
       ),
-      label: 'Stats'
+      label: 'Notifications'
     ),
-    const BottomNavigationBarItem(
-      activeIcon: Image(
-        image: AssetImage('assets/icons/profile_selected.png'),
-        width: 45,
-        height: 45,
+    BottomNavigationBarItem(
+      activeIcon: Image.asset(
+        'assets/icons/profile.png',
+        width: 32.5,
+        height: 32.5,
       ),
-      icon: Image(
-        image: AssetImage('assets/icons/profile_unselected.png'),
-        width: 45,
-        height: 45,
+      icon: Image.asset(
+        'assets/icons/profile.png',
+        width: 32.5,
+        height: 32.5,
       ),
       label: 'Profile'
     ),
@@ -80,9 +81,9 @@ class _NavState extends State<Nav> {
   Widget build(BuildContext context) { 
     widgetOptions = const <Widget>[
         Home(),
-        Center(child: Text("Hello world!")),
-        Center(child: Text("Hello world!")),
-        Center(child: Text("Hello world!")),
+        Center(child: Text("This is the Discovery Page!")),
+        Center(child: Text("This is the Notifications Page!")),
+        Profile()
       ];
 
     return Scaffold(

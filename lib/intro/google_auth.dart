@@ -19,17 +19,16 @@ class Authentication {
   }
 
   static Future<User?> signUpWithGoogle({required BuildContext context}) async {
-    log("YO");
     FirebaseAuth auth = FirebaseAuth.instance;
     User? user;
 
-    final GoogleSignIn googleSignIn = GoogleSignIn();
+    final GoogleSignIn googleSignIn = GoogleSignIn(
+      scopes: ["email"]
+    );
 
-    log("AGAIN");
     try {
       // Trigger Google Sign-In
-      final GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
-      
+      final googleSignInAccount = await googleSignIn.signIn();
       if (googleSignInAccount == null) {
         // User canceled login, return null
         return null;
@@ -49,7 +48,6 @@ class Authentication {
       user = userCredential.user;
 
       String? userEmail = user?.email;
-      print("✅ Google Sign-In successful: $userEmail");
 
       // Optional: Save user data
       // UserModel userMod = await api.getUser(user?.uid);
@@ -58,8 +56,6 @@ class Authentication {
       // prefs.setString('user', jsonEncode(userJson));
 
     } on FirebaseAuthException catch (e) {
-      print("❌ FirebaseAuthException: ${e.code}");
-
       if (!context.mounted) return null; // Prevent crashes
 
       String errorMessage = 'An error occurred. Please try again.';
@@ -76,8 +72,6 @@ class Authentication {
       );
 
     } catch (e) {
-      print("❌ Google Sign-In Error: $e");
-
       if (!context.mounted) return null; // Prevent crashes
 
       ScaffoldMessenger.of(context).showSnackBar(
