@@ -33,6 +33,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/
+    - assets/preview/
     - assets/splash_screen/
     - assets/icons/
     - assets/icons/passwordless/
