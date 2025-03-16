@@ -7,7 +7,7 @@
 		<key>CFBundleDevelopmentRegion</key>
 		<string>$(DEVELOPMENT_LANGUAGE)</string>
 		<key>CFBundleDisplayName</key>
-		<string>Mobile</string>
+		<string>Foodality</string>
 		<key>CFBundleExecutable</key>
 		<string>$(EXECUTABLE_NAME)</string>
 		<key>CFBundleIdentifier</key>
@@ -60,5 +60,10 @@
 		</array>
 		<key>UIStatusBarHidden</key>
 		<false/>
+		<key>NSCameraUsageDescription</key>
+		<string>Your app needs access to the camera to take photos and videos.</string>
+		
+		<key>NSPhotoLibraryUsageDescription</key>
+		<string>Your app needs access to the photo library to select photos and videos.</string>
 	</dict>
 </plist>

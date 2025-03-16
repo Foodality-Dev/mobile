@@ -75,7 +75,18 @@ class MainApp extends StatelessWidget {
         hoverColor: Colors.transparent,
       ),
       title: 'Foodality',
-      home: user != null ? const Nav() : Login(),
+      home: StreamBuilder<User?>(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.active) {
+            final user = snapshot.data;
+            return user == null ? const Login() : const Nav();
+          }
+          return const Scaffold(
+            body: Center(child: CircularProgressIndicator()),
+          ); // Show loading while checking auth state
+        },
+      ),
     );
   }
 }

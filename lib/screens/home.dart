@@ -10,52 +10,103 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   final ScrollController _scrollController = ScrollController();
 
+  final List<Map<String, dynamic>> restaurants = [
+    {
+      "name": "Izakaya",
+      "image": "assets/images/restaurant-mock3.jpg",
+      "distance": "1.2 mi",
+      "tags": "Japanese • Casual Dining"
+    },
+    {
+      "name": "Cafe Kacao",
+      "image": "assets/images/restaurant-mock2.png",
+      "distance": "3.5 mi",
+      "tags": "Brunch • Coffee"
+    },
+    {
+      "name": "Sushi Place",
+      "image": "assets/images/restaurant-mock.png",
+      "distance": "2.0 mi",
+      "tags": "Sushi • Japanese"
+    },
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white, // Matches IG's clean look
-        elevation: 0, // No shadow
+        forceMaterialTransparency: true,
+        scrolledUnderElevation: 0,
+        surfaceTintColor: Colors.white,
+        backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
+        primary: false,
         centerTitle: false,
-        title: Text(
-          "Foodality", // Change to your app name
-          style: TextStyle(
-            // fontFamily: 'Billabong', // Instagram's signature font (optional)
-            fontSize: 28,
-            fontWeight: FontWeight.bold,
-            color: Colors.black, // Dark text like IG
-          ),
+        title: Image.asset(
+          "assets/logos/foodality_text_logo.png",
+          height: 42,
+          color: Colors.black,
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: GridView.builder(
-          controller: _scrollController, // Attach scroll controller
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 1,
-            crossAxisSpacing: 0,
-            mainAxisSpacing: 5,
-          ),
-          itemCount: 8,
-          itemBuilder: (context, index) {
-            return Column(
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: Image.asset(
-                    'assets/images/restaurant-mock.png',
-                    height: 250,
-                    width: 250,
-                    fit: BoxFit.fill,
+      body: ListView.separated(
+        controller: _scrollController,
+        padding: EdgeInsets.zero,
+        separatorBuilder: (context, index) => Divider(
+          color: Colors.grey[300], // Light grey, subtle
+          thickness: 1, // Thin but visible
+        ),
+        itemCount: 15, // Keep list length
+        itemBuilder: (context, index) {
+          final restaurant = restaurants[index % restaurants.length]; // Cycle through sample images
+
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 6.0),
+                child: Text(
+                  restaurant["name"],
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
                   ),
                 ),
-                const Padding(padding: EdgeInsets.symmetric(vertical: 1)),
-                const Text('Cafe Kacao'),
-              ],
-            );
-          },
-        ),
+              ),
+              AspectRatio(
+                aspectRatio: 16 / 9, // Keeps image ratio consistent
+                child: Image.asset(
+                  restaurant["image"],
+                  width: double.infinity,
+                  fit: BoxFit.cover, // Fills width while keeping proportions
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 6),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      restaurant["tags"],
+                      style: const TextStyle(
+                        fontSize: 14,
+                        color: Colors.black54,
+                      ),
+                    ),
+                    Text(
+                      restaurant["distance"],
+                      style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          );
+        },
       ),
     );
   }
