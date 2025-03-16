@@ -9,9 +9,12 @@ Foodality is a next-gen food discovery app, similar to Yelp, but with smarter re
 🔔 Notifications – Get updates on deals, new reviews, and restaurant recommendations.<br>
 
 ## 📱 App Preview
-![Passwordless Login](https://github.com/Foodality-Dev/mobile/blob/133d66cd3d3cae6d70f8f06c314cd1e814f865d6/assets/preview/login-preview.png)
-![Home](https://github.com/Foodality-Dev/mobile/blob/133d66cd3d3cae6d70f8f06c314cd1e814f865d6/assets/preview/home_preview.png)
-![Discover your Foodality](https://github.com/Foodality-Dev/mobile/blob/133d66cd3d3cae6d70f8f06c314cd1e814f865d6/assets/preview/discover_preview.png)
+<p align="center">
+  <img src="https://github.com/Foodality-Dev/mobile/blob/133d66cd3d3cae6d70f8f06c314cd1e814f865d6/assets/preview/login-preview.png" width="30%">
+  <img src="https://github.com/Foodality-Dev/mobile/blob/133d66cd3d3cae6d70f8f06c314cd1e814f865d6/assets/preview/home_preview.png" width="30%">
+  <img src="https://github.com/Foodality-Dev/mobile/blob/133d66cd3d3cae6d70f8f06c314cd1e814f865d6/assets/preview/discover_preview.png" width="30%">
+</p>
+
 
 ## 🚀 Getting Started
 ### 1️⃣ Install Dependencies
