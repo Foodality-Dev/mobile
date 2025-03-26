@@ -18,10 +18,10 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final User? user = FirebaseAuth.instance.currentUser;
-
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        primaryColor: Color(0xFFC50102),
         primaryTextTheme: TextTheme(  // as shown on #catalog
           titleLarge: TextStyle(
             fontFamily: GoogleFonts.inter().fontFamily,

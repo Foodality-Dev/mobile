@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile/intro/google_auth.dart';
+import 'package:mobile/intro/signup/signup_email_password.dart';
 import 'package:mobile/nav.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -11,6 +13,21 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  String _error = "";
+
+  Future<void> _loginWithEmail() async {
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: _emailController.text.trim(),
+        password: _passwordController.text,
+      );
+    } on FirebaseAuthException catch (e) {
+      setState(() => _error = e.message ?? "Something went wrong");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
@@ -43,7 +60,81 @@ class _LoginState extends State<Login> {
                     // App Title (Looks Crisp)
                     Image.asset("assets/logos/foodality_full_logo.png", height: 150),
                     const SizedBox(height: 30),
-              
+
+                    TextField(
+                      controller: _emailController,
+                      cursorColor: Colors.black,
+                      decoration: InputDecoration(
+                        hintText: "Email",
+                        filled: true,
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30),
+                          borderSide: BorderSide(color: Colors.black),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30),
+                          borderSide: BorderSide(color: Colors.black), // removes the blue line
+                        ),
+                        contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                      ),
+                    ),
+
+                    const SizedBox(height: 12),
+
+                    // 🔒 Password Field
+                    TextField(
+                      controller: _passwordController,
+                      obscureText: true,
+                      cursorColor: Colors.black,
+                      decoration: InputDecoration(
+                        hintText: "Password",
+                        filled: true,
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30),
+                          borderSide: BorderSide(color: Colors.black),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30),
+                          borderSide: BorderSide(color: Colors.black), // removes the blue line
+                        ),
+                        contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                      ),
+                    ),
+
+                    const SizedBox(height: 12),
+
+                    // 🔑 Login Button
+                    ElevatedButton(
+                      onPressed: _loginWithEmail,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFFC50102),
+                        foregroundColor: Colors.white,
+                        minimumSize: const Size.fromHeight(50),
+                      ),
+                      child: Text("Login with Email"),
+                    ),
+
+                    if (_error.isNotEmpty) ...[
+                      const SizedBox(height: 8),
+                      Text(_error, style: const TextStyle(color: Colors.red, fontSize: 12)),
+                    ],
+
+                    const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 16),
+                      child: Row(
+                        children: [
+                          Expanded(child: Divider(thickness: 1)),
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 12),
+                            child: Text("OR", style: TextStyle(color: Colors.black54)),
+                          ),
+                          Expanded(child: Divider(thickness: 1)),
+                        ],
+                      ),
+                    ),
+
                     // Google Sign-In Button
                     _buildSocialButton( // https://developers.google.com/identity/branding-guidelines
                       icon: "assets/icons/passwordless/google-icon.png",
@@ -69,7 +160,32 @@ class _LoginState extends State<Login> {
                       onPressed: () => print("Apple Sign-In Pressed"), // TODO: APPLE SIGNIN
                     ),
                     const SizedBox(height: 12),
-              
+
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (_) => const SignupEmailPassword()),
+                        );
+                      },
+                      child: Text.rich(
+                        TextSpan(
+                          text: "Don't have an account? ",
+                          style: TextStyle(color: Colors.black54),
+                          children: [
+                            TextSpan(
+                              text: "Sign up",
+                              style: TextStyle(
+                                color: Color(0xFFC50102), // your brand red
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+
+                    ),
+
                     // Terms & Privacy
                     const Text(
                       "By continuing, you agree to our",
